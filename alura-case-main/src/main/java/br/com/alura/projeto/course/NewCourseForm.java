@@ -12,7 +12,7 @@ public class NewCourseForm {
 
     @NotBlank
     @Length(min = 4, max = 10)
-    @Pattern(regexp = "[a-z-]+", message = "Code must contain only lowercase letters and hyphens")
+    @Pattern(regexp = "^[a-z]+(-[a-z]+)*$", message = "Code must contain only lowercase letters and hyphens, without leading/trailing hyphens")
     private String code;
 
     private String description;
@@ -23,7 +23,6 @@ public class NewCourseForm {
     @NotNull
     private Long categoryId;
 
-    // Getters and Setters
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public String getCode() { return code; }
