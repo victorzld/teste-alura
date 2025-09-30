@@ -1,6 +1,7 @@
 package br.com.alura.projeto.course;
 
 import br.com.alura.projeto.category.CategoryRepository;
+import br.com.alura.projeto.user.Role;
 import br.com.alura.projeto.user.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -31,6 +31,10 @@ public class User {
         this.password = EncryptUtil.toMD5(password);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
