@@ -22,7 +22,7 @@ public class Course {
 
     @NotBlank
     @Length(min = 4, max = 10)
-    @Pattern(regexp = "[a-z-]+", message = "Code must contain only lowercase letters and hyphens")
+    @Pattern(regexp = "^[a-z]+(-[a-z]+)*$", message = "Code must contain only lowercase letters and hyphens, without leading/trailing hyphens")
     @Column(unique = true)
     private String code;
 
@@ -53,7 +53,6 @@ public class Course {
         this.category = category;
     }
 
-    // Getters
     public String getName() { return name; }
     public String getCode() { return code; }
     public User getInstructor() { return instructor; }
