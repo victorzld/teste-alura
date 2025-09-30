@@ -53,6 +53,11 @@ public class Course {
         this.category = category;
     }
 
+    public void inactivate() {
+        this.status = Status.INACTIVE;
+        this.inactivationDate = LocalDateTime.now();
+    }
+
     public String getName() { return name; }
     public String getCode() { return code; }
     public User getInstructor() { return instructor; }
