@@ -63,4 +63,5 @@ public class Course {
     public User getInstructor() { return instructor; }
     public Category getCategory() { return category; }
     public Status getStatus() { return status; }
+    public LocalDateTime getInactivationDate() { return inactivationDate; }
 }

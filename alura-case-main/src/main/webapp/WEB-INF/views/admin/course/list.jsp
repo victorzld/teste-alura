@@ -24,6 +24,8 @@
                 <th>Instrutor</th>
                 <th>Categoria</th>
                 <th>Status</th>
+                <th>Data de Inativação</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +36,14 @@
                     <td>${course.instructorName()}</td>
                     <td>${course.categoryName()}</td>
                     <td>${course.status()}</td>
+                    <td>${course.inactivationDate()}</td>
+                    <td>
+                        <c:if test="${course.status() == 'ACTIVE'}">
+                            <form action="/course/${course.code()}/inactive" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-warning btn-xs">Inativar</button>
+                            </form>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
