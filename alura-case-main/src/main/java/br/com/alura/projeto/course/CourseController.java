@@ -35,7 +35,7 @@ public class CourseController {
     public String create(NewCourseForm form, Model model) {
         model.addAttribute("newCourseForm", form);
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("instructors", userRepository.findAll());
+        model.addAttribute("instructors", userRepository.findByRole(Role.INSTRUCTOR));
         return "admin/course/newForm";
     }
 
