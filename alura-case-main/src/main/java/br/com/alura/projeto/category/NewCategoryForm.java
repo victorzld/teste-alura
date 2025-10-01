@@ -19,9 +19,14 @@ public class NewCategoryForm {
     @NotBlank
     private String color;
 
+    private String description;
+
+    private String iconPath;
+
     public Category toModel() {
-        return new Category(name, code, color, order);
+        return new Category(name, code, color, order, description, iconPath);
     }
+
 
     public String getName() {
         return name;
@@ -53,5 +58,21 @@ public class NewCategoryForm {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
     }
 }

@@ -1,7 +1,7 @@
 package br.com.alura.projeto.category;
 
-public record CategoryDTO(Long id, String name, String code, String color, int order) {
+public record CategoryDTO(Long id, String name, String code, String color, int order, String description, String iconPath) {
     public CategoryDTO(Category category) {
-        this(category.getId(), category.getName(), category.getCode(), category.getColor(), category.getOrder());
+        this(category.getId(), category.getName(), category.getCode(), category.getColor(), category.getOrder(), category.getDescription(), category.getIconPath());
     }
 }
