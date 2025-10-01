@@ -30,16 +30,31 @@ public class Category {
     @Column(name = "`order`")
     private int order;
 
+    private String description;
+
+    @Column(name = "icon_path")
+    private String iconPath;
+
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Deprecated
     public Category() {}
 
-    public Category(String name, String code, String color, int order) {
+    public Category(String name, String code, String color, int order, String description, String iconPath) {
         this.name = name;
         this.code = code;
         this.color = color;
         this.order = order;
+        this.description = description;
+        this.iconPath = iconPath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getIconPath() {
+        return iconPath;
     }
 
     public Long getId() {
