@@ -67,4 +67,62 @@ public class CourseController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/admin/course/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid course Id:" + id));
+        NewCourseForm form = new NewCourseForm();
+        form.setName(course.getName());
+        form.setCode(course.getCode());
+        form.setDescription(course.getDescription());
+        form.setInstructorId(course.getInstructor().getId());
+        form.setCategoryId(course.getCategory().getId());
+        form.setStatus(course.getStatus()); // Carrega o status atual
+        model.addAttribute("newCourseForm", form);
+        model.addAttribute("courseId", id);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("instructors", userRepository.findByRole(Role.INSTRUCTOR));
+        return "admin/course/editForm";
+    }
+
+    @PostMapping("/admin/course/edit/{id}")
+    @Transactional
+    public String update(@PathVariable Long id, @Valid NewCourseForm form, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("courseId", id);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("instructors", userRepository.findByRole(Role.INSTRUCTOR));
+            return "admin/course/editForm";
+        }
+
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid course Id:" + id));
+
+        if (!course.getCode().equals(form.getCode()) && courseRepository.existsByCode(form.getCode())) {
+            result.rejectValue("code", "code.exists", "Course code already in use");
+            model.addAttribute("courseId", id);
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("instructors", userRepository.findByRole(Role.INSTRUCTOR));
+            return "admin/course/editForm";
+        }
+
+        var instructor = userRepository.findById(form.getInstructorId()).orElseThrow(() -> new IllegalArgumentException("Instructor not found"));
+        var category = categoryRepository.findById(form.getCategoryId()).orElseThrow(() -> new IllegalArgumentException("Category not found"));
+
+        course.setName(form.getName());
+        course.setCode(form.getCode());
+        course.setDescription(form.getDescription());
+        course.setInstructor(instructor);
+        course.setCategory(category);
+
+        if (form.getStatus() == Status.ACTIVE) {
+            course.activate();
+        } else {
+            course.inactivate();
+        }
+
+        courseRepository.save(course);
+        return "redirect:/admin/courses";
+    }
 }

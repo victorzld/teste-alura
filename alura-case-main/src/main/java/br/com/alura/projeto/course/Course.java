@@ -58,10 +58,41 @@ public class Course {
         this.inactivationDate = LocalDateTime.now();
     }
 
+    public void activate() {
+        this.status = Status.ACTIVE;
+        this.inactivationDate = null;
+    }
+
+    public Long getId() { return id; }
     public String getName() { return name; }
     public String getCode() { return code; }
+    public String getDescription() { return description; }
     public User getInstructor() { return instructor; }
     public Category getCategory() { return category; }
     public Status getStatus() { return status; }
     public LocalDateTime getInactivationDate() { return inactivationDate; }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setInstructor(User instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

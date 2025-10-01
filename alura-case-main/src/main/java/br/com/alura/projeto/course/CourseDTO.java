@@ -3,6 +3,7 @@ package br.com.alura.projeto.course;
 import java.time.format.DateTimeFormatter;
 
 public record CourseDTO(
+        Long id, // Adicionado
         String name,
         String code,
         String instructorName,
@@ -15,11 +16,12 @@ public record CourseDTO(
 
     public CourseDTO(Course course) {
         this(
+                course.getId(),
                 course.getName(),
                 course.getCode(),
-                course.getInstructor().getName(),
-                course.getCategory().getId(),
-                course.getCategory().getName(),
+                course.getInstructor() != null ? course.getInstructor().getName() : "",
+                course.getCategory() != null ? course.getCategory().getId() : null,
+                course.getCategory() != null ? course.getCategory().getName() : "",
                 course.getStatus(),
                 course.getInactivationDate() != null ? course.getInactivationDate().format(FORMATTER) : ""
         );

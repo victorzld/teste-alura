@@ -23,6 +23,8 @@ public class NewCourseForm {
     @NotNull
     private Long categoryId;
 
+    private Status status;
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public String getCode() { return code; }
@@ -33,4 +35,6 @@ public class NewCourseForm {
     public void setInstructorId(Long instructorId) { this.instructorId = instructorId; }
     public Long getCategoryId() { return categoryId; }
     public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 }
