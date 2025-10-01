@@ -38,6 +38,7 @@
                     <td>${course.status()}</td>
                     <td>${course.inactivationDate()}</td>
                     <td>
+                        <a href="/admin/course/edit/${course.id()}" class="btn btn-primary btn-xs">Editar</a>
                         <c:if test="${course.status() == 'ACTIVE'}">
                             <form action="/course/${course.code()}/inactive" method="post" style="display:inline;">
                                 <button type="submit" class="btn btn-warning btn-xs">Inativar</button>
