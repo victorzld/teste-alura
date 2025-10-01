@@ -1,0 +1,2 @@
+ALTER TABLE Category ADD COLUMN description TEXT;
+ALTER TABLE Category ADD COLUMN icon_path VARCHAR(255);
