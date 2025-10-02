@@ -79,7 +79,7 @@ Além do solicitado, foi implementada uma página de administração para visual
 
 Para garantir a qualidade e o correto funcionamento da aplicação, adotei uma estratégia de testes que cobre diferentes camadas do sistema.
 
-* **Testes de Unidade:** Focados em validar regras de negócio específicas e isoladas dentro das entidades.
+* **Testes Unitários:** Focados em validar regras de negócio específicas e isoladas dentro das entidades.
     * `UserTest`: Garante que a senha do usuário seja criptografada em MD5 no momento da criação.
     * `CourseTest`: Verifica a lógica dos métodos `inactivate()` e `activate()`, garantindo que o status e a data de inativação sejam gerenciados corretamente.
 
