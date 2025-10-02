@@ -116,10 +116,12 @@ public class CourseController {
         course.setInstructor(instructor);
         course.setCategory(category);
 
-        if (form.getStatus() == Status.ACTIVE) {
-            course.activate();
-        } else {
-            course.inactivate();
+        if (form.getStatus() != course.getStatus()) {
+            if (form.getStatus() == Status.ACTIVE) {
+                course.activate();
+            } else {
+                course.inactivate();
+            }
         }
 
         courseRepository.save(course);
