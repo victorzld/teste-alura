@@ -23,7 +23,7 @@ public class UserController {
 
     @Transactional
     @PostMapping("/user/newStudent")
-    public ResponseEntity newStudent(@RequestBody @Valid NewStudentUserDTO newStudent) {
+    public ResponseEntity<?> newStudent(@RequestBody @Valid NewStudentUserDTO newStudent) {
         if(userRepository.existsByEmail(newStudent.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorItemDTO("email", "Email já cadastrado no sistema"));
@@ -32,7 +32,7 @@ public class UserController {
         User user = newStudent.toModel();
         userRepository.save(user);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UserListItemDTO(user));
     }
 
     @GetMapping("/user/all")
