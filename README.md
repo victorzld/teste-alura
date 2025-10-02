@@ -75,6 +75,25 @@ Foi criada uma API que gera um relatório dos cursos com o maior número de matr
 Além do solicitado, foi implementada uma página de administração para visualizar e cadastrar novos alunos diretamente pela interface gráfica.
 * **Implementação:** O `UserAdminController` gerencia a rota `/admin/students`, que exibe uma lista de todos os alunos e um formulário para a criação de novos, utilizando a view `list.jsp` em `admin/student`.
 
+## Estratégia de Testes
+
+Para garantir a qualidade e o correto funcionamento da aplicação, adotei uma estratégia de testes que cobre diferentes camadas do sistema.
+
+* **Testes de Unidade:** Focados em validar regras de negócio específicas e isoladas dentro das entidades.
+    * `UserTest`: Garante que a senha do usuário seja criptografada em MD5 no momento da criação.
+    * `CourseTest`: Verifica a lógica dos métodos `inactivate()` e `activate()`, garantindo que o status e a data de inativação sejam gerenciados corretamente.
+
+* **Testes de Repositório (`@DataJpaTest`):** Validam a camada de persistência de dados.
+    * `CategoryRepositoryTest` e `CourseRepositoryTest`: Asseguram que as consultas customizadas nos repositórios, como buscas por código ou ordenação, funcionam como esperado.
+
+* **Testes de Controller (`@WebMvcTest`):** Focados na camada web, simulando requisições HTTP e validando o comportamento dos controllers.
+    * `UserControllerTest`: Testa os fluxos de criação de novos estudantes, incluindo validações de entrada (e-mail inválido, senha em branco) e a resposta para e-mails já existentes.
+    * `CategoryControllerTest`: Verifica se a listagem e o salvamento de categorias estão funcionando corretamente.
+    * `RegistrationControllerTest`: Valida o cenário de sucesso para a criação de uma nova matrícula via API.
+
+* **Testes de Integração (`@SpringBootTest`):** Garantem que os diferentes componentes da aplicação funcionam bem em conjunto.
+    * `RegistrationControllerIntegrationTest`: Simula o fluxo completo de matrícula de um aluno em um curso, desde a requisição na API até a persistência no banco de dados, validando a integração entre controller, serviço e repositório.
+
 ## Como Avaliar as Funcionalidades
 
 Para avaliar as funcionalidades, você pode usar as rotas da interface gráfica em um navegador ou os endpoints da API com uma ferramenta como o Postman.
